@@ -1,0 +1,7 @@
+{
+  "name": "rrc-R-tools",
+  "description": "R and Quarto workflow skills for RRC analysts. Includes tools for rendering Quarto documents and syncing output to shared network drives.",
+  "author": {
+    "name": "RRC"
+  }
+}
