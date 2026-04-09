@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-rrc-plugins",
+  "description": "RRC team plugins for R, Quarto, and data analysis workflows",
+  "owner": {
+    "name": "RRC Associates"
+  },
+  "plugins": [
+    {
+      "name": "rrc-R-tools",
+      "description": "R and Quarto workflow skills for RRC analysts. Includes tools for rendering Quarto documents and syncing output to shared network drives.",
+      "source": "./rrc-R-tools",
+      "category": "development"
+    }
+  ]
+}
