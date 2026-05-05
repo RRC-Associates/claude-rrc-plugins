@@ -60,7 +60,7 @@ Open Claude Code (terminal or GUI) and run this slash command at the `>` prompt:
 ```{r}
 #| echo: true
 #| eval: false
-/marketplace add RRC-Associates/claude-rrc-plugins
+/plugin marketplace add RRC-Associates/claude-rrc-plugins
 ```
 
 This registers the RRC plugin repository as a source Claude Code can install from. You only need to do this once.
