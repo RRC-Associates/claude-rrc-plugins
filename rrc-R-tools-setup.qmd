@@ -1,0 +1,87 @@
+---
+title: "Setting Up the RRC R Tools Plugin for Claude Code"
+author: "Cathy Thomas"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    df-print: kable
+    theme: cosmo
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+## Goal
+
+This guide walks through installing the `rrc-R-tools` Claude Code plugin, which gives you a shared set of R and Quarto skills that load automatically in every Claude Code session.
+
+This is a Claude Code-specific setup. 
+
+## What a Plugin Is
+
+Claude Code can be extended with **plugins**: packages of skills, commands, and other behaviors that load automatically whenever you start a session. Skills are context documents that shape how Claude responds. The `r-style` skill, for example, tells Claude to prefer tidyverse idioms and `here::here()` for file paths without you having to say so every time.
+
+Plugins are the team mechanism for sharing skills. Rather than each person maintaining their own copy of the R style guide in `~/.claude/skills/`, we maintain one shared version in a plugin repo on GitHub. When the skill is updated, everyone gets the new version the next time Claude Code refreshes its plugin cache.
+
+## Plugins vs Personal Skills
+
+You can also keep skills that are just for you. Personal skills live in `~/.claude/skills/` on your own machine and are not shared with anyone. A personal skill might capture your preferred writing style, your go-to packages for a specific project type, or any other preference that doesn't need to be team-wide. To add one, create a subfolder in `~/.claude/skills/` with a `SKILL.md` file inside it.
+
+Plugin skills and personal skills coexist. Both load at the start of every session.
+
+## Skills Included in the RRC R Tools Plugin
+
+| Skill | What it does |
+|---|---|
+| `r-style` | Applies tidyverse style when writing or reviewing R code: pipe-based workflows, dplyr/tidyr/ggplot2, `here::here()` for repo paths. Loads on any `.R`, `.Rmd`, or `.qmd` work without prompting. |
+| `diagnose-before-fixing` | When you share an error, Claude explains what it means and identifies the root cause before proposing a fix, then waits for your confirmation before making edits. |
+| `quarto-render-sync` | On-demand skill for setting up a post-render hook that renames HTML output and copies it to a network drive (Egnyte / Z: drive). |
+| `quarto-scaffold` | On-demand skill for scaffolding a new Quarto project with the right folder structure, `_quarto.yml`, template `.qmd`, setup chunk, and `.gitignore`. |
+
+The first two skills (`r-style` and `diagnose-before-fixing`) load automatically on every session. The last two (`quarto-render-sync` and `quarto-scaffold`) are reference skills. To invoke them, just describe what you want in plain language: "scaffold a new Quarto project" or "set up a render-and-sync workflow." This works in both the Claude Code terminal and the Claude Code GUI in the Claude App desktop.
+
+## Prerequisites
+
+- Claude Code installed and logged in
+- Access to the `RRC-Associates/claude-rrc-plugins` GitHub repository
+
+## Setup
+
+### Step 1: Add the marketplace
+
+Open Claude Code (terminal or GUI) and run this slash command at the `>` prompt:
+
+```{r}
+#| echo: true
+#| eval: false
+/marketplace add RRC-Associates/claude-rrc-plugins
+```
+
+This registers the RRC plugin repository as a source Claude Code can install from. You only need to do this once.
+
+### Step 2: Install the plugin
+
+Still at the `>` prompt, run:
+
+```{r}
+#| echo: true
+#| eval: false
+/plugin install rrc-R-tools@claude-rrc-plugins
+```
+
+Claude Code will show a confirmation screen with the plugin name and description. Select **Install for you (user scope)** and press Enter.
+
+User scope installs the plugin for your account across all projects. Do not choose project scope unless you have a specific reason.
+
+### Step 3: Verify
+
+Close and reopen Claude Code, then start a new session. Ask Claude: "What skills do you have available?" You should see `r-style`, `diagnose-before-fixing`, `quarto-render-sync`, and `quarto-scaffold` in the response.
+
+## Keeping the Plugin Current
+
+Claude Code checks for plugin updates automatically. If you want to force a refresh, run `/plugin update rrc-R-tools@claude-rrc-plugins` at the prompt.
+
+To suggest a change to one of the skills, reach out to Cathy. Changes go into the GitHub repo and propagate to everyone on the next update.
