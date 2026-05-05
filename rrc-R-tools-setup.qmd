@@ -30,6 +30,8 @@ Plugins are the team mechanism for sharing skills. Rather than each person maint
 
 You can also keep skills that are just for you. Personal skills live in `~/.claude/skills/` on your own machine and are not shared with anyone. A personal skill might capture your preferred writing style, your go-to packages for a specific project type, or any other preference that doesn't need to be team-wide. To add one, create a subfolder in `~/.claude/skills/` with a `SKILL.md` file inside it.
 
+You do not need to write the skill file yourself. You can ask Claude to create one for you ("create a personal skill that..."), or use Claude's built-in skill-creator skill, which guides you through building, testing, and refining a new skill.
+
 Plugin skills and personal skills coexist. Both load at the start of every session.
 
 ## Skills Included in the RRC R Tools Plugin
@@ -41,7 +43,7 @@ Plugin skills and personal skills coexist. Both load at the start of every sessi
 | `quarto-render-sync` | On-demand skill for setting up a post-render hook that renames HTML output and copies it to a network drive (Egnyte / Z: drive). |
 | `quarto-scaffold` | On-demand skill for scaffolding a new Quarto project with the right folder structure, `_quarto.yml`, template `.qmd`, setup chunk, and `.gitignore`. |
 
-The first two skills (`r-style` and `diagnose-before-fixing`) load automatically on every session. The last two (`quarto-render-sync` and `quarto-scaffold`) are reference skills. To invoke them, just describe what you want in plain language: "scaffold a new Quarto project" or "set up a render-and-sync workflow." This works in both the Claude Code terminal and the Claude Code GUI in the Claude App desktop.
+The first two skills (`r-style` and `diagnose-before-fixing`) load automatically on every session. The last two (`quarto-render-sync` and `quarto-scaffold`) are reference skills. To invoke them, describe what you want in plain language ("scaffold a new Quarto project" or "set up a render-and-sync workflow"), or use a slash command directly: `/quarto-scaffold` or `/quarto-render-sync`. This works in both the Claude Code terminal and the Claude Code GUI in the Claude App desktop.
 
 ## Prerequisites
 

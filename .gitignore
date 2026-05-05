@@ -1,0 +1,6 @@
+# Quarto build cache
+.quarto/
+
+# OS
+.DS_Store
+Thumbs.db
