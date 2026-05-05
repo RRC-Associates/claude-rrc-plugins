@@ -8,6 +8,7 @@ format:
     toc-depth: 3
     df-print: kable
     theme: cosmo
+    embed-resources: true
 execute:
   echo: false
   warning: false

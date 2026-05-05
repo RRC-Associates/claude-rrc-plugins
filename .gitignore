@@ -1,5 +1,6 @@
-# Quarto build cache
+# Quarto build cache and supporting files (HTML is self-contained)
 .quarto/
+*_files/
 
 # OS
 .DS_Store
