@@ -129,7 +129,7 @@ User scope installs the plugin for your account across all projects. Do not choo
 
 ### Step 4: Verify
 
-Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: "What skills do you have available?" You should see `r-style`, `diagnose-before-fixing`, `quarto-render-sync`, and `quarto-scaffold` in the response.
+Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: "What skills do you have available?" You should see `r-style` and `diagnose-before-fixing` in the response. `quarto-render-sync` and `quarto-scaffold` are on-demand skills — they won't appear in the list but are available when you need them (just describe what you want or use `/quarto-scaffold` or `/quarto-render-sync` directly).
 
 ## Keeping the Plugin Current
 
