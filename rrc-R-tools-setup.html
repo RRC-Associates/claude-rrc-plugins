@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Cathy Thomas">
-<meta name="dcterms.date" content="2026-05-05">
+<meta name="dcterms.date" content="2026-05-06">
 
 <title>Setting Up the RRC R Tools Plugin for Claude Code</title>
 <style>
@@ -2213,12 +2213,18 @@ vertical-align: -.125em;
   <li><a href="#what-a-plugin-is" id="toc-what-a-plugin-is" class="nav-link" data-scroll-target="#what-a-plugin-is">What a Plugin Is</a></li>
   <li><a href="#plugins-vs-personal-skills" id="toc-plugins-vs-personal-skills" class="nav-link" data-scroll-target="#plugins-vs-personal-skills">Plugins vs Personal Skills</a></li>
   <li><a href="#skills-included-in-the-rrc-r-tools-plugin" id="toc-skills-included-in-the-rrc-r-tools-plugin" class="nav-link" data-scroll-target="#skills-included-in-the-rrc-r-tools-plugin">Skills Included in the RRC R Tools Plugin</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a>
+  <ul class="collapse">
+  <li><a href="#claude-desktop-app" id="toc-claude-desktop-app" class="nav-link" data-scroll-target="#claude-desktop-app">Claude desktop App</a></li>
+  <li><a href="#claude-code-cli" id="toc-claude-code-cli" class="nav-link" data-scroll-target="#claude-code-cli">Claude Code CLI</a></li>
+  <li><a href="#github-access" id="toc-github-access" class="nav-link" data-scroll-target="#github-access">GitHub access</a></li>
+  </ul></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a>
   <ul class="collapse">
-  <li><a href="#step-1-add-the-marketplace" id="toc-step-1-add-the-marketplace" class="nav-link" data-scroll-target="#step-1-add-the-marketplace">Step 1: Add the marketplace</a></li>
-  <li><a href="#step-2-install-the-plugin" id="toc-step-2-install-the-plugin" class="nav-link" data-scroll-target="#step-2-install-the-plugin">Step 2: Install the plugin</a></li>
-  <li><a href="#step-3-verify" id="toc-step-3-verify" class="nav-link" data-scroll-target="#step-3-verify">Step 3: Verify</a></li>
+  <li><a href="#step-1-open-a-claude-code-session" id="toc-step-1-open-a-claude-code-session" class="nav-link" data-scroll-target="#step-1-open-a-claude-code-session">Step 1: Open a Claude Code session</a></li>
+  <li><a href="#step-2-add-the-marketplace" id="toc-step-2-add-the-marketplace" class="nav-link" data-scroll-target="#step-2-add-the-marketplace">Step 2: Add the marketplace</a></li>
+  <li><a href="#step-3-install-the-plugin" id="toc-step-3-install-the-plugin" class="nav-link" data-scroll-target="#step-3-install-the-plugin">Step 3: Install the plugin</a></li>
+  <li><a href="#step-4-verify" id="toc-step-4-verify" class="nav-link" data-scroll-target="#step-4-verify">Step 4: Verify</a></li>
   </ul></li>
   <li><a href="#keeping-the-plugin-current" id="toc-keeping-the-plugin-current" class="nav-link" data-scroll-target="#keeping-the-plugin-current">Keeping the Plugin Current</a></li>
   </ul>
@@ -2245,7 +2251,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 5, 2026</p>
+      <p class="date">May 6, 2026</p>
     </div>
   </div>
   
@@ -2309,33 +2315,65 @@ vertical-align: -.125em;
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<ul>
-<li>Claude Code installed and logged in</li>
-<li>Access to the <code>RRC-Associates/claude-rrc-plugins</code> GitHub repository</li>
-</ul>
+<section id="claude-desktop-app" class="level3">
+<h3 class="anchored" data-anchor-id="claude-desktop-app">Claude desktop App</h3>
+<p>The Claude desktop App is where you do your day-to-day work. If you don’t have it yet, download it from <a href="https://claude.ai/download">claude.ai</a> and log in.</p>
+</section>
+<section id="claude-code-cli" class="level3">
+<h3 class="anchored" data-anchor-id="claude-code-cli">Claude Code CLI</h3>
+<p>The plugin install commands require the <strong>Claude Code CLI</strong> — a separate tool from the desktop App. Having the App does not give you the <code>claude</code> terminal command; you need to install the CLI separately. You only need it once for this setup.</p>
+<p><strong>Install the CLI.</strong> Open PowerShell and run:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>irm https<span class="sc">:</span><span class="er">//</span>claude.ai<span class="sc">/</span>install.ps1 <span class="sc">|</span> iex</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Fix PATH if needed.</strong> The installer may warn that the install location is not in your PATH. If so, run this before closing PowerShell (no need to change anything — it uses your current username automatically):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>[Environment]<span class="sc">::</span><span class="fu">SetEnvironmentVariable</span>(<span class="st">&quot;PATH&quot;</span>, <span class="sc">$</span>env<span class="sc">:</span>PATH <span class="sc">+</span> <span class="st">&quot;;$env:USERPROFILE\.local</span><span class="sc">\b</span><span class="st">in&quot;</span>, <span class="st">&quot;User&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then close and reopen PowerShell.</p>
+<p><strong>Verify.</strong> Run <code>claude --version</code>. You should see a version number. If you still get “not recognized,” close and reopen PowerShell once more.</p>
+</section>
+<section id="github-access" class="level3">
+<h3 class="anchored" data-anchor-id="github-access">GitHub access</h3>
+<p>You need access to the <code>RRC-Associates/claude-rrc-plugins</code> GitHub repository. No local clone is needed — Claude Code fetches the plugin directly from GitHub.</p>
+</section>
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<section id="step-1-add-the-marketplace" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-add-the-marketplace">Step 1: Add the marketplace</h3>
-<p>Open Claude Code (terminal or GUI) and run this slash command at the <code>&gt;</code> prompt:</p>
+<p>The plugin install commands run inside a Claude Code CLI session — not in PowerShell directly, and not in the desktop App GUI. You only need to do this once. After setup, the skills load automatically in every session including the App GUI.</p>
+<section id="step-1-open-a-claude-code-session" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-open-a-claude-code-session">Step 1: Open a Claude Code session</h3>
+<p>In PowerShell, run:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span>plugin marketplace add RRC<span class="sc">-</span>Associates<span class="sc">/</span>claude<span class="sc">-</span>rrc<span class="sc">-</span>plugins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>claude</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You will be prompted to:</p>
+<ol type="1">
+<li><strong>Sign in</strong> — select the option to log in with your Anthropic subscription. A verification code will be displayed; paste it back into the session when prompted.</li>
+<li><strong>Pick a mode</strong> — select the default mode to continue.</li>
+</ol>
+<p>Once signed in, you’ll see the <code>&gt;</code> prompt. You’re now inside Claude Code.</p>
+</section>
+<section id="step-2-add-the-marketplace" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-add-the-marketplace">Step 2: Add the marketplace</h3>
+<p>At the <code>&gt;</code> prompt, run:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span>plugin marketplace add RRC<span class="sc">-</span>Associates<span class="sc">/</span>claude<span class="sc">-</span>rrc<span class="sc">-</span>plugins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This registers the RRC plugin repository as a source Claude Code can install from. You only need to do this once.</p>
 </section>
-<section id="step-2-install-the-plugin" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-install-the-plugin">Step 2: Install the plugin</h3>
+<section id="step-3-install-the-plugin" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-install-the-plugin">Step 3: Install the plugin</h3>
 <p>Still at the <code>&gt;</code> prompt, run:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span>plugin install rrc<span class="sc">-</span>R<span class="sc">-</span>tools<span class="sc">@</span>claude<span class="sc">-</span>rrc<span class="sc">-</span>plugins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="sc">/</span>plugin install rrc<span class="sc">-</span>R<span class="sc">-</span>tools<span class="sc">@</span>claude<span class="sc">-</span>rrc<span class="sc">-</span>plugins</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Claude Code will show a confirmation screen with the plugin name and description. Select <strong>Install for you (user scope)</strong> and press Enter.</p>
 <p>User scope installs the plugin for your account across all projects. Do not choose project scope unless you have a specific reason.</p>
 </section>
-<section id="step-3-verify" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-verify">Step 3: Verify</h3>
-<p>Close and reopen Claude Code, then start a new session. Ask Claude: “What skills do you have available?” You should see <code>r-style</code>, <code>diagnose-before-fixing</code>, <code>quarto-render-sync</code>, and <code>quarto-scaffold</code> in the response.</p>
+<section id="step-4-verify" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-verify">Step 4: Verify</h3>
+<p>Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: “What skills do you have available?” You should see <code>r-style</code>, <code>diagnose-before-fixing</code>, <code>quarto-render-sync</code>, and <code>quarto-scaffold</code> in the response.</p>
 </section>
 </section>
 <section id="keeping-the-plugin-current" class="level2">
