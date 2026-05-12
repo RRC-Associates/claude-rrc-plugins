@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Cathy Thomas">
-<meta name="dcterms.date" content="2026-05-06">
+<meta name="dcterms.date" content="2026-05-12">
 
 <title>Setting Up the RRC R Tools Plugin for Claude Code</title>
 <style>
@@ -2251,7 +2251,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 6, 2026</p>
+      <p class="date">May 12, 2026</p>
     </div>
   </div>
   
@@ -2378,7 +2378,17 @@ vertical-align: -.125em;
 </section>
 <section id="keeping-the-plugin-current" class="level2">
 <h2 class="anchored" data-anchor-id="keeping-the-plugin-current">Keeping the Plugin Current</h2>
-<p>Claude Code checks for plugin updates automatically. If you want to force a refresh, run <code>/plugin update rrc-R-tools@claude-rrc-plugins</code> at the prompt.</p>
+<p>By default, Claude Code only auto-checks for updates from Anthropic’s own marketplaces — third-party marketplaces like <code>claude-rrc-plugins</code> have auto-update disabled out of the box. To opt in (one-time setup):</p>
+<ol type="1">
+<li>Run <code>/plugin</code> in any Claude Code session.</li>
+<li>Open the <strong>Marketplaces</strong> tab and select <code>claude-rrc-plugins</code>.</li>
+<li>Choose <strong>Enable auto-update</strong>.</li>
+</ol>
+<p>With auto-update enabled, Claude Code checks for new versions at session startup. If an update is found, you’ll be prompted to run <code>/reload-plugins</code> to activate it in the current session.</p>
+<p><strong>To force a refresh manually</strong>, run these two commands at the prompt:</p>
+<pre><code>/plugin marketplace update claude-rrc-plugins
+/reload-plugins</code></pre>
+<p>The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads the new versions into your active session.</p>
 <p>To suggest a change to one of the skills, reach out to Cathy. Changes go into the GitHub repo and propagate to everyone on the next update.</p>
 </section>
 
