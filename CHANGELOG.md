@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 Each entry lists the contributor in parentheses.
 
+## [1.1.0] — 2026-05-12
+
+### Added
+- `quarto-word`: Quarto -> Word (.docx) workflow — table patterns (flextable + chunk-level `tbl-cap`, `autofit`, `fit_to_width`), reference-doc page-number footer, and the `fix_docx.R` post-render patch for the flextable/Pandoc "unreadable content" bug. Bundles `fix_docx.R`. (Cathy)
+
 ## [1.0.0] — 2026-05-05
 
 ### Added
