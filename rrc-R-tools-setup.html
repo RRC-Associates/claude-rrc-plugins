@@ -2224,7 +2224,8 @@ vertical-align: -.125em;
   <li><a href="#step-1-open-a-claude-code-session" id="toc-step-1-open-a-claude-code-session" class="nav-link" data-scroll-target="#step-1-open-a-claude-code-session">Step 1: Open a Claude Code session</a></li>
   <li><a href="#step-2-add-the-marketplace" id="toc-step-2-add-the-marketplace" class="nav-link" data-scroll-target="#step-2-add-the-marketplace">Step 2: Add the marketplace</a></li>
   <li><a href="#step-3-install-the-plugin" id="toc-step-3-install-the-plugin" class="nav-link" data-scroll-target="#step-3-install-the-plugin">Step 3: Install the plugin</a></li>
-  <li><a href="#step-4-verify" id="toc-step-4-verify" class="nav-link" data-scroll-target="#step-4-verify">Step 4: Verify</a></li>
+  <li><a href="#step-4-enable-auto-update" id="toc-step-4-enable-auto-update" class="nav-link" data-scroll-target="#step-4-enable-auto-update">Step 4: Enable auto-update</a></li>
+  <li><a href="#step-5-verify" id="toc-step-5-verify" class="nav-link" data-scroll-target="#step-5-verify">Step 5: Verify</a></li>
   </ul></li>
   <li><a href="#keeping-the-plugin-current" id="toc-keeping-the-plugin-current" class="nav-link" data-scroll-target="#keeping-the-plugin-current">Keeping the Plugin Current</a></li>
   </ul>
@@ -2371,24 +2372,41 @@ vertical-align: -.125em;
 <p>Claude Code will show a confirmation screen with the plugin name and description. Select <strong>Install for you (user scope)</strong> and press Enter.</p>
 <p>User scope installs the plugin for your account across all projects. Do not choose project scope unless you have a specific reason.</p>
 </section>
-<section id="step-4-verify" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-verify">Step 4: Verify</h3>
-<p>Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: “What skills do you have available?” You should see <code>r-style</code> and <code>diagnose-before-fixing</code> in the response. <code>quarto-render-sync</code> and <code>quarto-scaffold</code> are on-demand skills — they won’t appear in the list but are available when you need them (just describe what you want or use <code>/quarto-scaffold</code> or <code>/quarto-render-sync</code> directly).</p>
+<section id="step-4-enable-auto-update" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-enable-auto-update">Step 4: Enable auto-update</h3>
+<p>By default, Claude Code only auto-checks for updates from Anthropic’s own marketplaces — third-party marketplaces like <code>claude-rrc-plugins</code> have auto-update disabled out of the box. Turn it on now so you don’t miss future skill updates:</p>
+<ol type="1">
+<li>At the <code>&gt;</code> prompt, run <code>/plugin</code>.</li>
+<li>Open the <strong>Marketplaces</strong> tab and select <code>claude-rrc-plugins</code>.</li>
+<li>Choose <strong>Enable auto-update</strong>.</li>
+</ol>
+<p>With this enabled, Claude Code checks for new versions at session startup and prompts you to run <code>/reload-plugins</code> whenever an update is available.</p>
+</section>
+<section id="step-5-verify" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-verify">Step 5: Verify</h3>
+<p>Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: “What skills do you have available?” You should see <code>r-style</code> and <code>diagnose-before-fixing</code> in the response. <code>quarto-render-sync</code>, <code>quarto-scaffold</code>, and <code>quarto-word</code> are on-demand skills — they won’t appear in the auto-load list but are available when you need them (just describe what you want or use the slash commands directly, e.g. <code>/quarto-scaffold</code>, <code>/quarto-render-sync</code>, <code>/quarto-word</code>).</p>
 </section>
 </section>
 <section id="keeping-the-plugin-current" class="level2">
 <h2 class="anchored" data-anchor-id="keeping-the-plugin-current">Keeping the Plugin Current</h2>
-<p>By default, Claude Code only auto-checks for updates from Anthropic’s own marketplaces — third-party marketplaces like <code>claude-rrc-plugins</code> have auto-update disabled out of the box. To opt in (one-time setup):</p>
-<ol type="1">
-<li>Run <code>/plugin</code> in any Claude Code session.</li>
-<li>Open the <strong>Marketplaces</strong> tab and select <code>claude-rrc-plugins</code>.</li>
-<li>Choose <strong>Enable auto-update</strong>.</li>
-</ol>
-<p>With auto-update enabled, Claude Code checks for new versions at session startup. If an update is found, you’ll be prompted to run <code>/reload-plugins</code> to activate it in the current session.</p>
-<p><strong>To force a refresh manually</strong>, run these two commands at the prompt:</p>
+<p>You enabled auto-update during setup (Step 4), so Claude Code will check for new versions at the start of each session and prompt you to run <code>/reload-plugins</code> when one is available. That’s the normal path.</p>
+<p><strong>To force a refresh manually</strong> — for example if you know a change just landed and you don’t want to wait for the next session — run these two commands at the prompt:</p>
 <pre><code>/plugin marketplace update claude-rrc-plugins
 /reload-plugins</code></pre>
 <p>The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads the new versions into your active session.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>If <code>/reload-plugins</code> doesn’t seem to pick up the new version</strong>, fully quit the Claude Code app and restart it. On Windows, “X-ing out” of the window isn’t always enough — open Task Manager and end the <code>Claude</code> process (or any background helper processes), then relaunch. The CLI version usually picks up changes after <code>/reload-plugins</code> alone; the GUI app sometimes needs a full restart.</p>
+</div>
+</div>
 <p>To suggest a change to one of the skills, reach out to Cathy. Changes go into the GitHub repo and propagate to everyone on the next update.</p>
 </section>
 
