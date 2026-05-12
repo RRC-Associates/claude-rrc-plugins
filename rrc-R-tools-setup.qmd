@@ -133,6 +133,21 @@ Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Cla
 
 ## Keeping the Plugin Current
 
-Claude Code checks for plugin updates automatically. If you want to force a refresh, run `/plugin update rrc-R-tools@claude-rrc-plugins` at the prompt.
+By default, Claude Code only auto-checks for updates from Anthropic's own marketplaces — third-party marketplaces like `claude-rrc-plugins` have auto-update disabled out of the box. To opt in (one-time setup):
+
+1. Run `/plugin` in any Claude Code session.
+2. Open the **Marketplaces** tab and select `claude-rrc-plugins`.
+3. Choose **Enable auto-update**.
+
+With auto-update enabled, Claude Code checks for new versions at session startup. If an update is found, you'll be prompted to run `/reload-plugins` to activate it in the current session.
+
+**To force a refresh manually**, run these two commands at the prompt:
+
+```
+/plugin marketplace update claude-rrc-plugins
+/reload-plugins
+```
+
+The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads the new versions into your active session.
 
 To suggest a change to one of the skills, reach out to Cathy. Changes go into the GitHub repo and propagate to everyone on the next update.
