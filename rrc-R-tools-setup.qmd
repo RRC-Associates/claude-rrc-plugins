@@ -82,7 +82,9 @@ You need access to the `RRC-Associates/claude-rrc-plugins` GitHub repository. No
 
 ## Setup
 
-The plugin install commands run inside a Claude Code CLI session — not in PowerShell directly, and not in the desktop App GUI. You only need to do this once. After setup, the skills load automatically in every session including the App GUI.
+::: callout-important
+**Plugin management is CLI-only.** All of the `/plugin ...` commands and `/reload-plugins` run inside a Claude Code **CLI session** (the `claude` command in PowerShell), not in the desktop App GUI. The GUI loads and uses the skills, but it doesn't expose the plugin-management slash commands. You only need to do these setup steps once; afterward, the skills are available in both CLI and GUI sessions.
+:::
 
 ### Step 1: Open a Claude Code session
 
@@ -143,19 +145,31 @@ Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Cla
 
 ## Keeping the Plugin Current
 
-You enabled auto-update during setup (Step 4), so Claude Code will check for new versions at the start of each session and prompt you to run `/reload-plugins` when one is available. That's the normal path.
+You enabled auto-update during setup (Step 4), so Claude Code checks for new versions at the start of each session.
 
-**To force a refresh manually** — for example if you know a change just landed and you don't want to wait for the next session — run these two commands at the prompt:
+### From the CLI
+
+When an update is available, Claude Code prompts you to run `/reload-plugins` — that loads the new versions into your active session. That's the entire flow.
+
+**To force a refresh manually** (e.g., a change just landed and you don't want to wait for the next session start):
 
 ```
 /plugin marketplace update claude-rrc-plugins
 /reload-plugins
 ```
 
-The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads the new versions into your active session.
+The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads them into your session.
 
-::: callout-note
-**If `/reload-plugins` doesn't seem to pick up the new version**, fully quit the Claude Code app and restart it. On Windows, "X-ing out" of the window isn't always enough — open Task Manager and end the `Claude` process (or any background helper processes), then relaunch. The CLI version usually picks up changes after `/reload-plugins` alone; the GUI app sometimes needs a full restart.
+### From the desktop App GUI
+
+The `/plugin ...` family and `/reload-plugins` are **not available** in the GUI input — they're CLI-only. To pick up an update from the GUI, **fully quit the app and relaunch it**.
+
+::: callout-important
+On Windows, closing the window ("X-ing out") doesn't always end the process. Open **Task Manager**, end the `Claude` process (and any background helper processes), then relaunch the app. After this restart, the new skill version will be loaded.
 :::
+
+If you want to force a marketplace refresh before relaunching the GUI, open a CLI session (`claude` in PowerShell), run the two-command pair above, then fully quit and relaunch the GUI.
+
+### Suggesting changes
 
 To suggest a change to one of the skills, reach out to Cathy. Changes go into the GitHub repo and propagate to everyone on the next update.

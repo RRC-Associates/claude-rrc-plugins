@@ -2227,7 +2227,12 @@ vertical-align: -.125em;
   <li><a href="#step-4-enable-auto-update" id="toc-step-4-enable-auto-update" class="nav-link" data-scroll-target="#step-4-enable-auto-update">Step 4: Enable auto-update</a></li>
   <li><a href="#step-5-verify" id="toc-step-5-verify" class="nav-link" data-scroll-target="#step-5-verify">Step 5: Verify</a></li>
   </ul></li>
-  <li><a href="#keeping-the-plugin-current" id="toc-keeping-the-plugin-current" class="nav-link" data-scroll-target="#keeping-the-plugin-current">Keeping the Plugin Current</a></li>
+  <li><a href="#keeping-the-plugin-current" id="toc-keeping-the-plugin-current" class="nav-link" data-scroll-target="#keeping-the-plugin-current">Keeping the Plugin Current</a>
+  <ul class="collapse">
+  <li><a href="#from-the-cli" id="toc-from-the-cli" class="nav-link" data-scroll-target="#from-the-cli">From the CLI</a></li>
+  <li><a href="#from-the-desktop-app-gui" id="toc-from-the-desktop-app-gui" class="nav-link" data-scroll-target="#from-the-desktop-app-gui">From the desktop App GUI</a></li>
+  <li><a href="#suggesting-changes" id="toc-suggesting-changes" class="nav-link" data-scroll-target="#suggesting-changes">Suggesting changes</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -2341,7 +2346,19 @@ vertical-align: -.125em;
 </section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>The plugin install commands run inside a Claude Code CLI session — not in PowerShell directly, and not in the desktop App GUI. You only need to do this once. After setup, the skills load automatically in every session including the App GUI.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Plugin management is CLI-only.</strong> All of the <code>/plugin ...</code> commands and <code>/reload-plugins</code> run inside a Claude Code <strong>CLI session</strong> (the <code>claude</code> command in PowerShell), not in the desktop App GUI. The GUI loads and uses the skills, but it doesn’t expose the plugin-management slash commands. You only need to do these setup steps once; afterward, the skills are available in both CLI and GUI sessions.</p>
+</div>
+</div>
 <section id="step-1-open-a-claude-code-session" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-open-a-claude-code-session">Step 1: Open a Claude Code session</h3>
 <p>In PowerShell, run:</p>
@@ -2389,25 +2406,37 @@ vertical-align: -.125em;
 </section>
 <section id="keeping-the-plugin-current" class="level2">
 <h2 class="anchored" data-anchor-id="keeping-the-plugin-current">Keeping the Plugin Current</h2>
-<p>You enabled auto-update during setup (Step 4), so Claude Code will check for new versions at the start of each session and prompt you to run <code>/reload-plugins</code> when one is available. That’s the normal path.</p>
-<p><strong>To force a refresh manually</strong> — for example if you know a change just landed and you don’t want to wait for the next session — run these two commands at the prompt:</p>
+<p>You enabled auto-update during setup (Step 4), so Claude Code checks for new versions at the start of each session.</p>
+<section id="from-the-cli" class="level3">
+<h3 class="anchored" data-anchor-id="from-the-cli">From the CLI</h3>
+<p>When an update is available, Claude Code prompts you to run <code>/reload-plugins</code> — that loads the new versions into your active session. That’s the entire flow.</p>
+<p><strong>To force a refresh manually</strong> (e.g., a change just landed and you don’t want to wait for the next session start):</p>
 <pre><code>/plugin marketplace update claude-rrc-plugins
 /reload-plugins</code></pre>
-<p>The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads the new versions into your active session.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>The first command pulls the latest catalog and plugin versions from the GitHub repo; the second loads them into your session.</p>
+</section>
+<section id="from-the-desktop-app-gui" class="level3">
+<h3 class="anchored" data-anchor-id="from-the-desktop-app-gui">From the desktop App GUI</h3>
+<p>The <code>/plugin ...</code> family and <code>/reload-plugins</code> are <strong>not available</strong> in the GUI input — they’re CLI-only. To pick up an update from the GUI, <strong>fully quit the app and relaunch it</strong>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>If <code>/reload-plugins</code> doesn’t seem to pick up the new version</strong>, fully quit the Claude Code app and restart it. On Windows, “X-ing out” of the window isn’t always enough — open Task Manager and end the <code>Claude</code> process (or any background helper processes), then relaunch. The CLI version usually picks up changes after <code>/reload-plugins</code> alone; the GUI app sometimes needs a full restart.</p>
+<p>On Windows, closing the window (“X-ing out”) doesn’t always end the process. Open <strong>Task Manager</strong>, end the <code>Claude</code> process (and any background helper processes), then relaunch the app. After this restart, the new skill version will be loaded.</p>
 </div>
 </div>
+<p>If you want to force a marketplace refresh before relaunching the GUI, open a CLI session (<code>claude</code> in PowerShell), run the two-command pair above, then fully quit and relaunch the GUI.</p>
+</section>
+<section id="suggesting-changes" class="level3">
+<h3 class="anchored" data-anchor-id="suggesting-changes">Suggesting changes</h3>
 <p>To suggest a change to one of the skills, reach out to Cathy. Changes go into the GitHub repo and propagate to everyone on the next update.</p>
+</section>
 </section>
 
 </main>
