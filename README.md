@@ -13,7 +13,6 @@ R and Quarto workflow skills for RRC analysts.
 | `r-style` | Tidyverse coding style, pipe-based workflows, `here::here()` for repo paths. Auto-loads on any R work. |
 | `diagnose-before-fixing` | Explains errors and identifies root causes before proposing fixes. Auto-loads for all debugging. |
 | `quarto-render-sync` | Sets up a post-render hook to copy output to a network drive. Invoke on demand. |
-| `quarto-scaffold` | Scaffolds a new Quarto project with RRC conventions. Invoke on demand. |
 | `quarto-word` | Build Quarto reports that render to Word (.docx) — table patterns, captions, page numbers, and the `fix_docx.R` post-render patch. Invoke on demand. |
 
 ## Setup
