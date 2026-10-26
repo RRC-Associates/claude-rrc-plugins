@@ -46,7 +46,6 @@ Key points:
 - **`reference-doc`** is the path (relative to the `.qmd`) to a Word document whose paragraph and character styles Quarto will use. Without one, you get pandoc's minimal default styles and things like the Caption style may be absent or invisible — see the "captions silently drop" gotcha below.
 - **`date: today` + `date-format: long`** renders something like "May 12, 2026". Other options: `"MMMM D, YYYY"`, `iso`, custom Luxon format strings.
 - **`fig-width`/`fig-height`/`fig-dpi`** are sane defaults for letter paper with 1" margins (6.5" content area).
-- For parameterized templates, see the `quarto-scaffold` skill.
 
 ---
 

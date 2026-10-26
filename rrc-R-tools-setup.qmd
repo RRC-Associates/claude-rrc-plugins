@@ -42,9 +42,9 @@ Plugin skills and personal skills coexist. Both load at the start of every sessi
 | `r-style` | Applies tidyverse style when writing or reviewing R code: pipe-based workflows, dplyr/tidyr/ggplot2, `here::here()` for repo paths. Loads on any `.R`, `.Rmd`, or `.qmd` work without prompting. |
 | `diagnose-before-fixing` | When you share an error, Claude explains what it means and identifies the root cause before proposing a fix, then waits for your confirmation before making edits. |
 | `quarto-render-sync` | On-demand skill for setting up a post-render hook that renames HTML output and copies it to a network drive (Egnyte / Z: drive). |
-| `quarto-scaffold` | On-demand skill for scaffolding a new Quarto project with the right folder structure, `_quarto.yml`, template `.qmd`, setup chunk, and `.gitignore`. |
+| `quarto-word` | On-demand skill for Quarto reports that render to Word (.docx): table patterns, captions, page numbers, and the `fix_docx.R` post-render patch. |
 
-The first two skills (`r-style` and `diagnose-before-fixing`) load automatically on every session. The last two (`quarto-render-sync` and `quarto-scaffold`) are reference skills. To invoke them, describe what you want in plain language ("scaffold a new Quarto project" or "set up a render-and-sync workflow"), or use a slash command directly: `/quarto-scaffold` or `/quarto-render-sync`. This works in both the Claude Code terminal and the Claude Code GUI in the Claude App desktop.
+The first two skills (`r-style` and `diagnose-before-fixing`) load automatically on every session. The other two (`quarto-render-sync` and `quarto-word`) are reference skills. To invoke them, describe what you want in plain language ("set up a render-and-sync workflow" or "build a Word report from this qmd"), or use a slash command directly: `/quarto-render-sync` or `/quarto-word`. This works in both the Claude Code terminal and the Claude Code GUI in the Claude App desktop.
 
 ## Prerequisites
 
@@ -141,7 +141,7 @@ With this enabled, Claude Code checks for new versions at session startup and pr
 
 ### Step 5: Verify
 
-Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: "What skills do you have available?" You should see `r-style` and `diagnose-before-fixing` in the response. `quarto-render-sync`, `quarto-scaffold`, and `quarto-word` are on-demand skills — they won't appear in the auto-load list but are available when you need them (just describe what you want or use the slash commands directly, e.g. `/quarto-scaffold`, `/quarto-render-sync`, `/quarto-word`).
+Close and reopen Claude Code (CLI or App GUI), then start a new session. Ask Claude: "What skills do you have available?" You should see `r-style` and `diagnose-before-fixing` in the response. `quarto-render-sync` and `quarto-word` are on-demand skills. They won't appear in the auto-load list but are available when you need them (just describe what you want or use the slash commands directly, e.g. `/quarto-render-sync`, `/quarto-word`).
 
 ## Keeping the Plugin Current
 

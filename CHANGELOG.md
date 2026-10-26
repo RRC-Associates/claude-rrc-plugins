@@ -10,6 +10,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 Each entry lists the contributor in parentheses.
 
+## [2.0.0] — 2026-10-26
+
+### Removed
+- `quarto-scaffold`: removed. It was user-invoked only and nothing outside the plugin's own documentation referenced it; the project conventions it scaffolded are covered by `quarto-word` and `quarto-render-sync`. The `/quarto-scaffold` slash command no longer exists. (Cathy)
+
 ## [1.1.0] — 2026-05-12
 
 ### Added
